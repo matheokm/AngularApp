@@ -5,7 +5,8 @@
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
-    "strict": true,
+    "strict": false, //1.- cambiar de true a false para desahabilitar el modo stricto
+    "noImplicitUseStrict": true, //2.- agregar "noImplicitUseStrict": true para deshabilitar completame el modo estricto
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
