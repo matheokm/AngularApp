@@ -1,1 +1,19 @@
-<p>form-elimina-persona works!</p>
+<div class="row">
+    <div class="col-md-12">
+      <div class="alert alert-info">
+        <strong>Esta seguro de eliminar?</strong>
+      </div>
+      <div mat-dialog-content>
+        <strong class="colorLabel">Identificacion:</strong> {{Identificacion}}
+        <p></p>
+        <strong class="colorLabel">Nombres:</strong> {{Nombres}}
+        <p></p>
+        <strong class="colorLabel">Edad: </strong>{{Edad}}
+      </div>
+  
+      <div mat-dialog-actions>
+        <button mat-button (click)="ActualizaPersona()">Eliminar</button>
+        <button mat-button (click)="ClosePopup()">Cancelar</button>
+      </div>
+    </div>
+  </div>

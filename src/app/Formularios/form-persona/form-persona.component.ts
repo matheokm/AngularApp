@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
-import { ToastrService } from 'ngx-toastr';
+import { ToastrService } from 'ngx-toastr'; //libreria de Notificaciones 
+import{FormcrearPersonaComponent} from'../form-persona/formcrear-persona/formcrear-persona.component'
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import{FormEliminaPersonaComponent} from'../form-persona/form-elimina-persona/form-elimina-persona.component'
 
 //importamos el modelo
 import {Persona} from '../../Modelos/Persona';
@@ -38,7 +41,7 @@ export class FormPersonaComponent implements OnInit {
 
   public lstPersona: Persona[];
   public listaPersona: any;
-  displayedColumns: string[] = ['IdPersona', 'Identificacion', 'Nombres', 'Edad'];
+  displayedColumns: string[] = ['IdPersona', 'Identificacion', 'Nombres', 'Edad', 'actions'];
   //dataSource = new MatTableDataSource(ELEMENT_DATA);
   public dataSource = new MatTableDataSource<Persona>();
 
@@ -46,44 +49,54 @@ export class FormPersonaComponent implements OnInit {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
-  constructor(public personaService:PersonaService, private toastr: ToastrService) { }
+  
+  //Se agrega las librerias importadas
+  constructor(public personaService:PersonaService, private toastr: ToastrService, 
+    public dialogService: MatDialog) { }
 
+  //metodo de inicializacion> almacena o contiene los metodos que se cargaran al levantarse la pagina
   ngOnInit(): void {
     this.consultaPersona();
-    this.toastr.success('Formulario Persona', 'MI PROYECTO'); // correcto
-    this.toastr.info('MI PROYECTO', 'Formulario Persona'); //informativo
-    this.toastr.warning('MI PROYECTO', 'Formulario Persona'); //advertencia
-    this.toastr.error('MI PROYECTO', 'Formulario Persona'); //error
+    //Notificaciones
+    //this.toastr.success('Formulario Persona', 'MI PROYECTO'); // correcto
+     //this.toastr.info('MI PROYECTO', 'Formulario Persona'); //informativo
+    // this.toastr.warning('MI PROYECTO', 'Formulario Persona'); //advertencia
+    // this.toastr.error('MI PROYECTO', 'Formulario Persona'); //error
 
   }
 
+  //metodo consulta de datos 
   public consultaPersona() {
     this.personaService.consultaPersona()
     .subscribe(res => {
       console.log('res',res)
       this.dataSource.data = res.Data as Persona[];
     })
-
-    // let resultado = this.personaService.consultaPersona();
-    // resultado.subscribe(
-    //   (response) => {
-    //     this.lstPersona = [];
-    //     this.listaPersona = response.Data;
-    //     this.listaPersona.forEach(eachEvent => {
-    //       let itemPersona: Persona = {
-    //         IdPersona :eachEvent.IdPersona,
-    //         Identificacion :eachEvent.Identificacion,
-    //         Nombres :eachEvent.Nombres,
-    //         Edad :eachEvent.Edad
-    //       }
-
-    //       this.lstPersona.push(itemPersona);
-    //     })
-    //     console.log('listaPersona',this.lstPersona);
-    //   },
-    //   (error) => { console.log("EROR", error); }
-    // );
   }
 
+  //metodo Pop-Up> Boton NUEVO
+  public CrearDialog() {
+      const dialogConfig = new MatDialogConfig();
+        const dialogRef = this.dialogService.open(FormcrearPersonaComponent, dialogConfig);
+        dialogRef.afterClosed().subscribe((response: any) => {
+          this.ngOnInit();
+        });
+    }
+
+    //metodo Pop-Up> Boton ELIMINAR
+  EliminaDialog(i: number, IdPersona: string, Identificacion: string,Nombres:string,Edad: any) {
+    const dialogConfig = new MatDialogConfig();
+        dialogConfig.data = {
+        IdPersona: IdPersona,
+        Identificacion: Identificacion,
+        Nombres: Nombres,
+        Edad: Edad
+      };
+      const dialogRef = this.dialogService.open(FormEliminaPersonaComponent, dialogConfig);
+      dialogRef.afterClosed().subscribe((response: any) => {
+        this.consultaPersona();
+      });
+  } 
 
 }
+
