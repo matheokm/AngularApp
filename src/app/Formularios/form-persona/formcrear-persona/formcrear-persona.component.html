@@ -10,8 +10,15 @@
                 <div class="form-group col-md-12">
                     <mat-form-field appearance="outline" style="display:inline ;">
                         <mat-label class="colorLabel">Identificación</mat-label>
-                        <input matInput placeholder="Ingrese Identificación" formControlName="Identificacion" name="Identificacion">
+                        <input matInput placeholder="Ingrese Identificación" formControlName="Identificacion" name="Identificacion"
+                               (focusout)="onFocusOutEvent($event)"  
+                        >
                     </mat-form-field>
+                    <div *ngIf="f.Identificacion.touched && f.Identificacion.invalid" style="color: red; font-size: smaller;">
+                        <div *ngIf="f.Identificacion.errors.required">* Campo Requerido.</div>
+                        <div *ngIf="f.Identificacion.errors.pattern">* Solo Números.</div>
+                        <div *ngIf="f.Identificacion.errors.minlength">* Son 10 digitos numéricos.</div>
+                    </div>
                 </div>
 
             </div>

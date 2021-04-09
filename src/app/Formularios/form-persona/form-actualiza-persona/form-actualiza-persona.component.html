@@ -1,1 +1,48 @@
-<p>form-actualiza-persona works!</p>
+<div class="row">
+    <p></p>
+</div>
+<div class="row">
+
+    <div class="col-md-12">
+        <div class="alert alert-info">
+            <strong>Modificar Persona</strong>
+        </div>
+
+        <form [formGroup]="frmActualizaPersona">
+            <div class="row">
+
+                <div class="form-group col-md-12">
+                    <mat-form-field appearance="outline" style="display:inline ;">
+                        <mat-label class="colorLabel">Identificacion</mat-label>
+                        <input matInput placeholder="Ingrese Identificación" formControlName="Identificacion" name="Identificacion">
+                    </mat-form-field>
+                </div> 
+            
+        </div>
+            <div class="row">
+                <div class="form-group col-md-12">
+                    <mat-form-field appearance="outline" style="display:inline ;">
+                        <mat-label class="colorLabel">Nombres</mat-label>
+                        <input matInput placeholder="Ingrese Nombres" formControlName="Nombres" name="Nombres">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-12">
+                    <mat-form-field appearance="outline" style="display:inline ;">
+                        <mat-label class="colorLabel">Edad</mat-label>
+                        <input matInput placeholder="Ingrese Edad" formControlName="Edad" name="Edad">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-12">
+                    <button mat-button (click) = "ActualizaPersona()">Guardar</button>
+                    <button mat-button (click) = "ClosePopup()">Cancelar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+</div>

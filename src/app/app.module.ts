@@ -20,6 +20,7 @@ import { FormcrearPersonaComponent } from './Formularios/form-persona/formcrear-
 import { FormActualizaPersonaComponent } from './Formularios/form-persona/form-actualiza-persona/form-actualiza-persona.component';
 import { FormEliminaPersonaComponent } from './Formularios/form-persona/form-elimina-persona/form-elimina-persona.component';
 import {ReactiveFormsModule } from '@angular/forms';
+import { OverlayComponent } from './Utilitarios/overlay/overlay.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import {ReactiveFormsModule } from '@angular/forms';
     FormPersonaComponent,
     FormcrearPersonaComponent,
     FormActualizaPersonaComponent,
-    FormEliminaPersonaComponent
+    FormEliminaPersonaComponent,
+    OverlayComponent
   ],
   imports: [
     BrowserModule,
