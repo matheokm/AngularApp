@@ -2,21 +2,28 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import {PersonaService} from '../../../Servicios/Persona/persona.service';
+import {GeneroService} from '../../../Servicios/Genero/genero.service';
 import {Configuration} from '../../../Config/app.configuration'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import {Genero} from 'src/app/Modelos/Genero';
+
 
 @Component({
   selector: 'app-formcrear-persona',
   templateUrl: './formcrear-persona.component.html',
   styleUrls: ['./formcrear-persona.component.less']
 })
+
 export class FormcrearPersonaComponent implements OnInit {
   public frmActualizaPersona: FormGroup;
-  constructor( private formBuilder: FormBuilder, public personaService:PersonaService, 
+  lstGenero: Genero[];
+  listaGenero: any;
+  constructor( private formBuilder: FormBuilder, public personaService:PersonaService, public generoService:GeneroService, 
     private toastr: ToastrService, private dialogRef: MatDialogRef<FormcrearPersonaComponent> ){ }
 
   ngOnInit(): void {
     this.InicializarFormActualizar();
+    this.ConsultaGenero();
   }
 
   public InicializarFormActualizar() {
@@ -69,7 +76,7 @@ export class FormcrearPersonaComponent implements OnInit {
   return this.frmActualizaPersona.controls;
  }
 
- public validarCedula( cedula: string)
+  public validarCedula( cedula: string)
  {
      //Preguntamos si la cedula consta de 10 digitos
      if(cedula.length == 10){
@@ -143,10 +150,29 @@ export class FormcrearPersonaComponent implements OnInit {
       //console.log('Esta cedula tiene menos de 10 Digitos');
       this.toastr.error('Esta cedula debe tener 10 Digitos Numericos', 'InCorrecto');
    } 
-
  }
 
-
+ public ConsultaGenero() {
+  console.log('log',this.listaGenero)
+  let resultado = this.generoService.ConsultaGenero()
+  resultado.subscribe(
+    (response) => {
+      this.lstGenero = [];
+      this.listaGenero = response.Data;
+      this.listaGenero.forEach(eachEvent => {
+        let itemGenero: Genero = {
+          codigo:eachEvent.codigo,
+          descripcion:eachEvent.descripcion,
+        }
+        this.lstGenero.push(itemGenero);
+      })
+      console.log('log',this.listaGenero);
+    },
+    
+    (error) => { console.log("EROR", error); }
+  );
+  console.log('log',this.listaGenero)
+  }
 
 }
 

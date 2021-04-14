@@ -21,6 +21,7 @@ import { FormActualizaPersonaComponent } from './Formularios/form-persona/form-a
 import { FormEliminaPersonaComponent } from './Formularios/form-persona/form-elimina-persona/form-elimina-persona.component';
 import {ReactiveFormsModule } from '@angular/forms';
 import { OverlayComponent } from './Utilitarios/overlay/overlay.component';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { OverlayComponent } from './Utilitarios/overlay/overlay.component';
     NgbModule,
     ToastrModule.forRoot(),
     ReactiveFormsModule,
-    MatDialogModule
+    MatDialogModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -4,5 +4,6 @@ export class Persona{
     Identificacion :string; 
     Nombres :string; 
     Edad :number;
+    Codigo: string;
  
 }
