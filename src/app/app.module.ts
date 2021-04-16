@@ -13,6 +13,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { ToastrModule } from 'ngx-toastr';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatChipsModule } from '@angular/material/chips';
+import {MatIconModule } from '@angular/material/icon';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 import { HttpClientModule,HttpClient } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -22,6 +25,7 @@ import { FormEliminaPersonaComponent } from './Formularios/form-persona/form-eli
 import {ReactiveFormsModule } from '@angular/forms';
 import { OverlayComponent } from './Utilitarios/overlay/overlay.component';
 import { MatSelectModule } from '@angular/material/select';
+import { FormChipPersonaComponent } from './Formularios/form-chip-persona/form-chip-persona.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +35,8 @@ import { MatSelectModule } from '@angular/material/select';
     FormcrearPersonaComponent,
     FormActualizaPersonaComponent,
     FormEliminaPersonaComponent,
-    OverlayComponent
+    OverlayComponent,
+    FormChipPersonaComponent
   ],
   imports: [
     BrowserModule,
@@ -40,6 +45,11 @@ import { MatSelectModule } from '@angular/material/select';
     MatTableModule,
     MatInputModule,
     MatButtonModule,
+    MatIconModule,
+    MatInputModule,
+    MatAutocompleteModule,
+    MatChipsModule,
+    
     FormsModule,
     HttpClientModule,
     NgbModule,
